@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Quadrati sovrapposti</title>
+  <style>
+    body {
+      position: relative;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .random-div {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .red {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="random-div blue"></div>
+  <div class="random-div yellow"></div>
+
+  <script>
+    function getRandomPosition() {
+      return [Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight)];
+    }
+
+    function checkOverlap() {
+      const [blueDiv, yellowDiv] = document.querySelectorAll('.random-div');
+
+      const blueRect = blueDiv.getBoundingClientRect();
+      const yellowRect = yellowDiv.getBoundingClientRect();
+
+      if (blueRect.x < yellowRect.x + yellowRect.width &&
+        blueRect.x + blueRect.width > yellowRect.x &&
+        blueRect.y < yellowRect.y + yellowRect.height &&
+        blueRect.y + blueRect.height > yellowRect.y) {
+        blueDiv.classList.add('red');
+        yellowDiv.classList.add('red');
+      } else {
+        blueDiv.classList.remove('red');
+        yellowDiv.classList.remove('red');
+        blueDiv.classList.add('blue');
+        yellowDiv.classList.add('yellow');
+      }
+    }
+
+    function moveDivs() {
+      const [blueDiv, yellowDiv] = document.querySelectorAll('.random-div');
+
+      const bluePosition = getRandomPosition();
+      const yellowPosition = getRandomPosition();
+
+      [blueDiv.style.left, blueDiv.style.top] = bluePosition.map(pos => pos + 'px');
+      [yellowDiv.style.left, yellowDiv.style.top] = yellowPosition.map(pos => pos + 'px');
+
+      checkOverlap();
+    }
+
+    setInterval(moveDivs, 1000);
+  </script>
+</body>
+
+</html>
