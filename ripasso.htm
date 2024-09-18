@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Dichiara che il documento utilizza HTML5 -->
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Numeri Casuali</title>
+    <!-- Titolo della pagina -->
+    <style>
+        /* Stile per il corpo della pagina */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Stile per il div che mostra il numero casuale */
+        #numbers {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Stile per il pulsante di generazione del numero */
+        #generate-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Intestazione della pagina -->
+    <h1>Generatore di Numeri Casuali</h1>
+
+    <!-- Pulsante per generare il numero casuale -->
+    <button id="generate-button">Genera Numero Casuale</button>
+
+    <!-- Div che mostrerà il numero casuale -->
+    <div id="numbers"></div>
+
+    <script>
+        // Funzione per generare un numero casuale tra 1 e 100
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 100) + 1;
+        }
+
+        // Funzione per aggiornare il contenuto della pagina con il numero casuale generato
+        function updateNumbers() {
+            const numbersDiv = document.getElementById('numbers');
+            const randomNumber = getRandomNumber();
+            numbersDiv.textContent = `Numero Casuale: ${randomNumber}`;
+        }
+
+        // Aggiunge un event listener al pulsante per generare il numero quando viene cliccato
+        document.getElementById('generate-button').addEventListener('click', updateNumbers);
+    </script>
+</body>
+</html>
